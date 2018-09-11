@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const NavBar = ({ addToList }) => {
     return (
         <div>
-            <nav>
+            <nav id='nav-id'>
                 <div className="nav-wrapper blue">
                     <a className="brand-logo">Logo</a>
                     <ul id="nav-mobile" className="right hide-on-med-and-down">

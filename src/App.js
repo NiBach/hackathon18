@@ -6,22 +6,8 @@ import AddDataModal from './components/AddDataModal'
 import { GeoLocation } from "react-redux-geolocation";
 import { Route, Switch } from 'react-router-dom'
 import SideNav from "./components/SideNav";
-import { connect } from 'react-redux'
+import CenteredMap from "./components/CenteredMap";
 
-
-
-
-function geolocationCom({geolocation}){
-  console.log(geolocation);
-  return <div className="center">
-    <p>{geolocation.latitude + ',' + geolocation.longitude}</p>
-  </div>
-}
-
-
-let Compo = connect(state => ({
-  geolocation: state.geolocation
-}))(geolocationCom);
 
 function addNavBar(Component, navBarProps, componentProps) {
   return () => <div>
@@ -31,11 +17,16 @@ function addNavBar(Component, navBarProps, componentProps) {
 }
 class App extends Component {
   render() {
+    // let navbarHeight = window.innerWidth < 601 ? 56 : 64; // this is the height of the navbar
+    // let remainingHeight = window.innerHeight - navbarHeight;
     return (
       <div className="App">
         <GeoLocation watch={true} enableHighAccuracy={true} />
         <Switch>
-          <Route exact path="/" component={addNavBar(Compo)} />
+          <Route exact path="/" component={addNavBar(() => <div id='map-containing-div'>
+            <CenteredMap/>
+          </div>
+          )} />
           <Route path="/sharedlist" component={addNavBar(JustList,{addToList: true})} />
         </Switch>
         <AddDataModal />
