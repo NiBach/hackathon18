@@ -6,6 +6,7 @@ export default () => {
         <ul className="sidenav" id="slide-out">
             <li><Link className='sidenav-close' to="/">geolocation</Link></li>
             <li><Link className='sidenav-close' to="/sharedlist">list</Link></li>
+            <li><Link className='sidenav-close' to="/camera">Camera</Link></li>
         </ul>
     )
 }

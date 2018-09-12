@@ -3,9 +3,19 @@
     width: 100%
 }
 
+.cameraWindow {
+    height: calc(var(--vh, 1vh)*100 - 56px);
+    width: 100%
+}
+
 @media only screen and (min-width: 601px){
     #map-containing-div {
         height: calc(var(--vh, 1vh)*100 - 64px);
         width: 100%
     }
+    .cameraWindow {
+        height: calc(var(--vh, 1vh)*100 - 64px);
+        width: 100%
+    }
 }
+

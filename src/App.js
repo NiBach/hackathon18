@@ -7,9 +7,10 @@ import { GeoLocation } from "react-redux-geolocation";
 import { Route, Switch } from 'react-router-dom'
 import SideNav from "./components/SideNav";
 import CenteredMap from "./components/CenteredMap";
+import CameraView from "./components/cameraView";
 
 
-function addNavBar(Component, navBarProps, componentProps) {
+function addNavBar(Component, navBarProps, componentProps) { // TODO - delete,  and create full components
   return () => <div>
     <NavBar {...navBarProps}/>
     <Component {...componentProps}/>
@@ -17,17 +18,13 @@ function addNavBar(Component, navBarProps, componentProps) {
 }
 class App extends Component {
   render() {
-    // let navbarHeight = window.innerWidth < 601 ? 56 : 64; // this is the height of the navbar
-    // let remainingHeight = window.innerHeight - navbarHeight;
     return (
       <div className="App">
         <GeoLocation watch={true} enableHighAccuracy={true} />
         <Switch>
-          <Route exact path="/" component={addNavBar(() => <div id='map-containing-div'>
-            <CenteredMap/>
-          </div>
-          )} />
+          <Route exact path="/" component={addNavBar(CenteredMap,{addToList: false})} />
           <Route path="/sharedlist" component={addNavBar(JustList,{addToList: true})} />
+          <Route path="/camera" component={CameraView} />
         </Switch>
         <AddDataModal />
         <SideNav/>
