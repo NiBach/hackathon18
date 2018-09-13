@@ -30,14 +30,19 @@ class MarkerWithInfo extends Component {
       let card =
                   <div className="card">
                       <div className="card-image">
-                  <img src={this.state.imageURL}/>
+                  <img 
+                    src={this.state.imageURL}
+                    data-target='camera-modal'
+                    className='modal-trigger'
+                    alt={description}/>
                               <span className="card-title">{title}</span>
                         </div>
                         <div className="card-content">
                               <p>{description}</p>
                           </div>
                           <div className="card-action">
-                              <a>This is a link</a>
+                            <a data-target='camera-modal' className='modal-trigger'>More...</a>
+                            <a onClick={this.handleMarkerClick}>close</a>
                           </div>
                       </div>
 
@@ -52,7 +57,7 @@ class MarkerWithInfo extends Component {
                       width: "60vw"
                   }
                   , closeBoxURL: ""
-                  , enableEventPropagation: false
+                  , enableEventPropagation: true
               }
               } >
                   {card}

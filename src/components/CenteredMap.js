@@ -1,10 +1,11 @@
-import React, { Component} from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { compose } from "redux";
 import { GoogleMap, withGoogleMap, withScriptjs } from "react-google-maps"
 import MarkerWithInfo from './MarkerWithInfo';
 import { geo } from "../storeCreator";
 import { markersCollection } from "../collections";
+import NavBar from "./NavBar";
 
 
 const defaultLocation = {
@@ -15,18 +16,18 @@ const defaultLocation = {
 const MapWrapper = (WrappedComponent) => (props) =>
   <div id='map-containing-div'>
     <WrappedComponent
-    googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCP0isnGUJW0vObC_EISH_Z-4b3JVgZ0S8&v=3.exp&libraries=geometry,drawing,places" 
-    loadingElement={<div style={{ height: `100%` }} />} 
-    containerElement={<div style={{ height: `100%` }} />}
-    mapElement={<div style={{ height: `100%` }} />}
-    {...props}
+      googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCP0isnGUJW0vObC_EISH_Z-4b3JVgZ0S8&v=3.exp&libraries=geometry,drawing,places"
+      loadingElement={<div style={{ height: `100%` }} />}
+      containerElement={<div style={{ height: `100%` }} />}
+      mapElement={<div style={{ height: `100%` }} />}
+      {...props}
     />
   </div>
 
 
 class CenteredMap extends Component {
-  
-  state={
+
+  state = {
     loaded: false,
     panned: false,
     places: []
@@ -39,10 +40,10 @@ class CenteredMap extends Component {
       loaded: true
     })
   }
-  componentWillReceiveProps({center, myLocation}){
-   if(!center && !this.state.panned){
-     this.ref.panTo(myLocation ? myLocation : defaultLocation);
-   }
+  componentWillReceiveProps({ center, myLocation }) {
+    if (!center && !this.state.panned) {
+      this.ref.panTo(myLocation ? myLocation : defaultLocation);
+    }
   }
 
   handlePan = () => {
@@ -51,8 +52,8 @@ class CenteredMap extends Component {
     })
   }
 
-  componentDidMount(){
-    const {myLocation} = this.props;
+  componentDidMount() {
+    const { myLocation } = this.props;
     const markers = geo.collection(markersCollection);
     const center = geo.point(myLocation.lat, myLocation.lng);
     const field = 'position';
@@ -66,21 +67,24 @@ class CenteredMap extends Component {
     const { center, zoom, myLocation } = this.props;
     let mapCenter = center ? center : (myLocation ? myLocation : defaultLocation);
     return (
-      <GoogleMap
-        defaultZoom={zoom ? zoom : 17}
-        defaultCenter={mapCenter}
-        ref={this.setLoaded}
-        onDrag={this.handlePan}
-      >
-      {this.state.places.map(place => <MarkerWithInfo position={{
-          lat: place.position.geopoint.latitude,
-          lng: place.position.geopoint.longitude
-        }} title={place.title} description={place.description} key={place.id} docId={place.id}/>)}
-      </GoogleMap>
+      <div>
+        <GoogleMap
+          defaultZoom={zoom ? zoom : 17}
+          defaultCenter={mapCenter}
+          ref={this.setLoaded}
+          onDrag={this.handlePan}
+        >
+          {this.state.places.map(place => <MarkerWithInfo position={{
+            lat: place.position.geopoint.latitude,
+            lng: place.position.geopoint.longitude
+          }} title={place.title} description={place.description} key={place.id} docId={place.id} />)}
+        </GoogleMap>
+        <NavBar/>
+      </div>
     )
   }
 }
-    
+
 
 export default compose(
   MapWrapper,
