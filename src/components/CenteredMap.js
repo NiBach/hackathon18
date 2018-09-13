@@ -29,6 +29,7 @@ class CenteredMap extends Component {
   state={
     loaded: false,
     panned: false,
+    places: []
   }
   ref = {}
 
@@ -56,11 +57,13 @@ class CenteredMap extends Component {
     const center = geo.point(myLocation.lat, myLocation.lng);
     const field = 'position';
     const query = markers.within(center, 50, field);
-    query.subscribe(x => console.log(x));
+    query.subscribe(places => this.setState({
+      places: places
+    }));
   }
 
   render() {
-    const { center, zoom, children, myLocation } = this.props;
+    const { center, zoom, myLocation } = this.props;
     let mapCenter = center ? center : (myLocation ? myLocation : defaultLocation);
     return (
       <GoogleMap
@@ -69,8 +72,10 @@ class CenteredMap extends Component {
         ref={this.setLoaded}
         onDrag={this.handlePan}
       >
-        {children}
-        <MarkerWithInfo position={mapCenter}/>
+      {this.state.places.map(place => <MarkerWithInfo position={{
+          lat: place.position.geopoint.latitude,
+          lng: place.position.geopoint.longitude
+        }} title={place.title} description={place.description}/>)}
       </GoogleMap>
     )
   }

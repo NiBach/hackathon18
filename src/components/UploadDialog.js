@@ -20,21 +20,18 @@ class UploadDialog extends Component {
     }
 
     handleUpload = () => {
-        console.log('clicked');
-        navigator.geolocation.getCurrentPosition(position => {
-            const lat = position.coords.latitude;
-            const lng = position.coords.longitude;
-            const markers = geo.collection(markersCollection);
-            const id = this.props.firestore.collection(markersCollection).doc().id;
-            markers.setDoc(id,{
-                title: this.state.title,
-                description: this.state.description,
-                position: geo.point(lat, lng).data, 
-            });
-            let ref = this.props.firebase.storage().ref().child(id + '/pic.jpg'); // TODO - change the name, and upload location as well
-            ref.putString(this.props.dataUri, 'data_url').then( () => console.log('uploaded')).catch(() => console.log('error:('));
-            this.props.dispatch(push('/'));
+        //console.log('clicked');
+        const {lat, lng} = this.props.myLocation
+        const markers = geo.collection(markersCollection);
+        const id = this.props.firestore.collection(markersCollection).doc().id;
+        markers.setDoc(id, {
+            title: this.state.title,
+            description: this.state.description,
+            position: geo.point(lat, lng).data,
         });
+        let ref = this.props.firebase.storage().ref().child(id + '/pic.jpg'); // TODO - change the name, and upload location as well
+        ref.putString(this.props.dataUri, 'data_url').then(() => console.log('uploaded')).catch(() => console.log('error:('));
+        this.props.dispatch(push('/'));
     }
 
     render() {
@@ -75,5 +72,9 @@ export default compose(
     withFirebase,
     connect(state => ({
         dataUri: state.ImageUri.uri,
+        myLocation: {
+            lat: state.geolocation.latitude,
+            lng: state.geolocation.longitude
+        },
     }),
 ))(UploadDialog)
