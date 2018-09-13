@@ -10,7 +10,7 @@ import { reducer as geolocation } from 'react-redux-geolocation';
 import thunk from 'redux-thunk';
 import { connectRouter, routerMiddleware } from 'connected-react-router'
 import { createBrowserHistory } from 'history'
-import { imageUploadReducer } from "./reducers";
+import { imageUploadReducer, facebookDataReducer } from "./reducers";
 import * as geofirex from 'geofirex';
 
 
@@ -49,6 +49,7 @@ const rootReducer = combineReducers({
     firestore: firestoreReducer,
     geolocation: geolocation,
     ImageUri: imageUploadReducer,
+    facebook: facebookDataReducer
 })
 
 // Create store with reducers and initial state

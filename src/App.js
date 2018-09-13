@@ -6,7 +6,6 @@ import SideNav from "./components/SideNav";
 import CenteredMap from "./components/CenteredMap";
 import CameraView from "./components/cameraView";
 import UploadDialog from "./components/UploadDialog";
-
 class App extends Component {
   render() {
     return (
@@ -18,6 +17,7 @@ class App extends Component {
           <Route path="/cameraDialog" component={UploadDialog}/>
         </Switch>
         <SideNav/>
+        
       </div>
     );
   }
