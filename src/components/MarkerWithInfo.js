@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import InfoBox from 'react-google-maps/lib/components/addons/InfoBox';
 import { Marker} from "react-google-maps"
+import { withFirebase } from 'react-redux-firebase';
 
 
-export default class MarkerWithInfo extends Component {
+class MarkerWithInfo extends Component {
   state = {
       opened: false,
+      imageURL: ''
   }
 
   handleMarkerClick = () =>{
@@ -14,13 +16,21 @@ export default class MarkerWithInfo extends Component {
       })
   }
 
+  componentDidMount() {
+      this.props.firebase.storage().ref().child(this.props.docId + '/pic.jpg').getDownloadURL().then(url => {this.setState({
+          imageURL: url
+      })
+      console.log(url);
+    })
+  }
+
   render() {
       const {position, title, description} = this.props;
 
       let card =
                   <div className="card">
                       <div className="card-image">
-                  <img src="https://materializecss.com/images/sample-1.jpg"/>
+                  <img src={this.state.imageURL}/>
                               <span className="card-title">{title}</span>
                         </div>
                         <div className="card-content">
@@ -51,3 +61,5 @@ export default class MarkerWithInfo extends Component {
       )
   }
 }
+
+export default withFirebase(MarkerWithInfo);

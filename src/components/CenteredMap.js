@@ -75,7 +75,7 @@ class CenteredMap extends Component {
       {this.state.places.map(place => <MarkerWithInfo position={{
           lat: place.position.geopoint.latitude,
           lng: place.position.geopoint.longitude
-        }} title={place.title} description={place.description}/>)}
+        }} title={place.title} description={place.description} key={place.id} docId={place.id}/>)}
       </GoogleMap>
     )
   }
