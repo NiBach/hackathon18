@@ -10,7 +10,7 @@ const NavBar = ({ addToList }) => {
                     <ul id="nav-mobile" className="right hide-on-med-and-down">
                         <li><Link to="/">geolocation</Link></li>
                         <li><Link to="/sharedlist">list</Link></li>
-                        <li><Link to="/camera">Camera</Link></li>
+                        <li><Link to="/cameraView">Camera</Link></li>
                     </ul>
                     <a data-target="slide-out" className="sidenav-trigger hide-on-large-only left">
                         <i className="material-icons">menu</i>

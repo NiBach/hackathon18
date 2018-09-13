@@ -3,17 +3,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import { store } from './storeCreator';
+import { store, history } from './storeCreator';
 import { Provider } from 'react-redux';
 import 'materialize-css/dist/css/materialize.min.css'
 import M from 'materialize-css/dist/js/materialize.min.js'
-import { BrowserRouter as Router } from 'react-router-dom'
+//import { BrowserRouter as Router } from 'react-router-dom'
+import { ConnectedRouter } from 'connected-react-router'
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router>
+    <ConnectedRouter history={history}>
       <App />
-    </Router>
+    </ConnectedRouter>
   </Provider>,
   document.getElementById('root'));
 registerServiceWorker();

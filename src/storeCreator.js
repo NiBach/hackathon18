@@ -8,6 +8,11 @@ import { reactReduxFirebase, firebaseReducer } from 'react-redux-firebase'
 import { reduxFirestore, firestoreReducer } from 'redux-firestore'
 import { reducer as geolocation } from 'react-redux-geolocation';
 import thunk from 'redux-thunk';
+import { connectRouter, routerMiddleware } from 'connected-react-router'
+import { createBrowserHistory } from 'history'
+import { imageUploadReducer } from "./reducers";
+import * as geofirex from 'geofirex';
+
 
 // react-redux-firebase config
 const rrfConfig = {
@@ -42,17 +47,23 @@ const createStoreWithFirebase = compose(
 const rootReducer = combineReducers({
     firebase: firebaseReducer,
     firestore: firestoreReducer,
-    geolocation: geolocation
+    geolocation: geolocation,
+    ImageUri: imageUploadReducer,
 })
 
 // Create store with reducers and initial state
 const initialState = {}
 
+export const history = createBrowserHistory()
+
 export const store = createStoreWithFirebase(
-    rootReducer,
+    connectRouter(history)(rootReducer), // new root reducer with router state
     initialState,
     applyMiddleware(
+        routerMiddleware(history),
         thunk
     )
 );
 
+
+export const geo = geofirex.init(firebase);

@@ -8,6 +8,7 @@ import { Route, Switch } from 'react-router-dom'
 import SideNav from "./components/SideNav";
 import CenteredMap from "./components/CenteredMap";
 import CameraView from "./components/cameraView";
+import UploadDialog from "./components/UploadDialog";
 
 
 function addNavBar(Component, navBarProps, componentProps) { // TODO - delete,  and create full components
@@ -24,7 +25,8 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={addNavBar(CenteredMap,{addToList: false})} />
           <Route path="/sharedlist" component={addNavBar(JustList,{addToList: true})} />
-          <Route path="/camera" component={CameraView} />
+          <Route path="/cameraView" component={CameraView} />
+          <Route path="/cameraDialog" component={UploadDialog}/>
         </Switch>
         <AddDataModal />
         <SideNav/>

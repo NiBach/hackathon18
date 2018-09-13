@@ -1,0 +1,1 @@
+export const IMAGE_TO_UPLOAD='image to upload';

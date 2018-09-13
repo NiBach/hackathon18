@@ -1,13 +1,22 @@
 import React, { Component } from 'react';
 import Camera, { FACING_MODES, IMAGE_TYPES } from 'react-html5-camera-photo';
 import 'react-html5-camera-photo/build/css/index.css';
-import { firebaseConnect } from 'react-redux-firebase';
+//import { firebaseConnect } from 'react-redux-firebase';
+import { compose } from 'C:/Users/bachr/AppData/Local/Microsoft/TypeScript/3.0/node_modules/redux';
+import { connect } from "react-redux";
+import { push } from 'connected-react-router';
+import imageActionCreator from "../actions/imageAction";
+
 
 class CameraView extends Component {
     onTakePhoto(dataUri) {
         // Do stuff with the photo...
-        let ref = this.props.firebase.storage().ref().child('demo.jpg'); // TODO - change the name, and upload location as well
-        ref.putString(dataUri, 'data_url').then( () => console.log('uploaded')).catch(() => console.log('error:('));
+
+        
+        console.log(this.props);
+        const {dispatch} = this.props;
+        dispatch(imageActionCreator(dataUri));
+        dispatch(push('/cameraDialog'));
     }
 
     onCameraError(error) {
@@ -49,4 +58,6 @@ CameraView.defaultProps = {
     width: window.innerWidth,
 }
 
-export default firebaseConnect()(CameraView);
+export default compose(
+    connect(),
+)(CameraView);
