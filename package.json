@@ -12,6 +12,7 @@
     "react-facebook-login": "^4.1.0",
     "react-google-maps": "^9.4.5",
     "react-html5-camera-photo": "^1.2.8-beta.0",
+    "react-images-upload": "^1.2.3",
     "react-redux": "^5.0.7",
     "react-redux-firebase": "^2.1.8",
     "react-redux-geolocation": "^1.0.14",
