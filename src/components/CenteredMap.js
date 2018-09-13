@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { compose } from "redux";
 import { GoogleMap, withGoogleMap, withScriptjs } from "react-google-maps"
 import MarkerWithInfo from './MarkerWithInfo';
+import { geo } from "../storeCreator";
+import { markersCollection } from "../collections";
 
 
 const defaultLocation = {
@@ -46,6 +48,15 @@ class CenteredMap extends Component {
     this.setState({
       panned: true,
     })
+  }
+
+  componentDidMount(){
+    const {myLocation} = this.props;
+    const markers = geo.collection(markersCollection);
+    const center = geo.point(myLocation.lat, myLocation.lng);
+    const field = 'position';
+    const query = markers.within(center, 50, field);
+    query.subscribe(x => console.log(x));
   }
 
   render() {

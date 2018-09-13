@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Camera, { FACING_MODES, IMAGE_TYPES } from 'react-html5-camera-photo';
 import 'react-html5-camera-photo/build/css/index.css';
 //import { firebaseConnect } from 'react-redux-firebase';
-import { compose } from 'C:/Users/bachr/AppData/Local/Microsoft/TypeScript/3.0/node_modules/redux';
+import { compose } from 'redux';
 import { connect } from "react-redux";
 import { push } from 'connected-react-router';
 import imageActionCreator from "../actions/imageAction";
