@@ -7,9 +7,6 @@ function sidenav ({imageURL, name}) {
     return (
         
         <ul className="sidenav" id="slide-out">
-<<<<<<< HEAD
-            <li><Link className='sidenav-close' to="/">Map</Link></li>
-=======
             <li><div className="user-view">
                 <div className="background">
                     <img src="https://media-cdn.tripadvisor.com/media/photo-s/13/78/52/51/wild-food-foraging.jpg"/>
@@ -22,7 +19,6 @@ function sidenav ({imageURL, name}) {
                 </div></li>
             <li><Link className='sidenav-close' to="/">geolocation</Link></li>
             <li><Link className='sidenav-close' to="/sharedlist">list</Link></li>
->>>>>>> Facebook side Nav
             <li><Link className='sidenav-close' to="/cameraView">Camera</Link></li>
             <li><Facebook /></li>
         </ul>
