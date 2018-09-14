@@ -14,7 +14,7 @@ const NavBar = ({ addToList }) => {
                     <a data-target="slide-out" className="sidenav-trigger hide-on-large-only left">
                         <i className="material-icons">menu</i>
                     </a>
-                    <Link className="brand-logo btn-floating btn-large waves-effect waves-light red center" to="/cameraView"><i className="material-icons teal lighten-4">where_to_vote</i></Link>
+                    <Link className="brand-logo btn-floating btn-large waves-effect waves-light red center" to="/cameraView"><i className="material-icons teal lighten-4">add_location</i></Link>
 
                 </div>
             </nav>
