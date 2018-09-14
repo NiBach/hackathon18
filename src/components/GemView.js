@@ -21,16 +21,12 @@ class GemView extends Component {
 
         axios.get("https://api.edamam.com/search?q=" + this.props.title + "&app_id=f2661170&app_key=405d3fd787ec4090ef19cc9ae276bed3")
     .then(response => {
-      console.log(response);
+
       let hits = response.data.hits;
       if(hits.length > 0){
-        console.log("ok");
       this.setState({recipeTitle: hits[0].recipe.label,
                                       recipeUrl: hits[0].recipe.url,
                                     recipeImage: hits[0].recipe.image});
-                                    console.log("start here");
-                                    console.log(this.state.recipeTitle);
-                                      console.log(this.state.recipeImage);
                                   }});
 
   }
@@ -62,16 +58,13 @@ class GemView extends Component {
                         <li className="tab"><a className="active" href="#comments-tab">Comments</a></li>
                         <li className="tab"><a href="#test-swipe-3">Recipe</a></li>
                     </ul>
-                    <div id="description-tab" className="blue">
+                    <div id="description-tab" className="white">
                         <div className="tab-container">
                             {description}
                         </div>
                     </div>
                     <div id="comments-tab">
-                        <FacebookProvider appId="1827157337399053">
-                            <Comments href="http://www.facebook.com" />
-                        </FacebookProvider>
-
+                        <Comments href={document.location.href} />
                     </div>
                     <div id="test-swipe-3" className="white">
                     <div className="recipe-img">
