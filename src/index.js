@@ -8,11 +8,15 @@ import { Provider } from 'react-redux';
 import 'materialize-css/dist/css/materialize.min.css'
 import M from 'materialize-css/dist/js/materialize.min.js'
 import { ConnectedRouter } from 'connected-react-router'
+import FacebookProvider from 'react-facebook';
+
 
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <App />
+      <FacebookProvider appId="1827157337399053">
+        <App />
+      </FacebookProvider>
     </ConnectedRouter>
   </Provider>,
   document.getElementById('root'));

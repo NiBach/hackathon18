@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import FacebookLogin from 'react-facebook-login';
 import facebookAction from "../actions/facebookAction";
 import { connect } from "react-redux";
+import { Login } from 'react-facebook';
 
 class Facebook extends Component {
     state = {
@@ -12,50 +12,28 @@ class Facebook extends Component {
         // picture: ''
     }
     responseFacebook = response => {
-        this.props.dispatch(facebookAction(response.picture.data.url, response.name));
-      this.setState({
-          isLoggedIn: true,
-        //   userID: response.userID,
-        //   name: response.name,
-        //   email: response.email,
-        //   picture: response.picture.data.url
-      });
+        this.setState({
+            isLoggedIn: true,
+            //   userID: response.userID,
+            //   name: response.name,
+            //   email: response.email,
+            //   picture: response.picture.data.url
+        });
+        this.props.dispatch(facebookAction('', response.profile.first_name));
     }
     componentClicked = () => console.log('clicked');
 
+
     render() {
-        let fbContent;
-
-        if(this.state.isLoggedIn){
-            fbContent=( null
-            // <div 
-            // style={{
-            //   //  width: "400px",
-            //     margin: "auto",
-            //     background:"#FFFFFF",
-            //    // padding: "20px"
-
-            // }}
-            
-            
-            // >
-            //     <img src = {this.state.picture} alt={this.state.name}/>
-            //      Baby cEATer {this.state.name}
-            // </div>
-
-          
-            );
-        } else {
-        fbContent= (<FacebookLogin
-            appId="1827157337399053"
-            autoLoad={true}
-            fields="name,email,picture"
-            onClick={this.componentClicked}
-            callback={this.responseFacebook} />);    
-        }
         return (
-            <div>{fbContent}</div>
-        )
+                this.state.isLoggedIn ? null : <Login
+                    scope="email"
+                    onResponse={this.responseFacebook}
+                    onError={this.handleError}
+                >
+                    <span>Login via Facebook</span>
+                </Login>
+        );
     }
 }
 

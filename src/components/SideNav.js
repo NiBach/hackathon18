@@ -22,7 +22,7 @@ function sidenav ({imageURL, name}) {
             <li><Link className='sidenav-close' to="/cameraView"><i class="material-icons">add_location</i>Fresh finding</Link></li>
             <li><div class="divider"></div></li>           
             <li><a class="subheader"><i class="material-icons">business</i>All about us</a></li>
-            <li><Facebook /></li>
+            <li><a><Facebook /></a></li>
         </ul>
     )
 }
