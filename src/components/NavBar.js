@@ -10,7 +10,7 @@ const NavBar = ({ addToList }) => {
             <nav id='nav-id'>
                 <div className="nav-wrapper teal darken-1">
 
-                    <a className="brand-logo right"><img src={logo} height='54'></img></a>
+                    <a className="brand-logo right"><img src={logo} height='54' alt='Logo' ></img></a>
                     <a data-target="slide-out" className="sidenav-trigger hide-on-large-only left">
                         <i className="material-icons">menu</i>
                     </a>
