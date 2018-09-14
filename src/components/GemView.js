@@ -23,6 +23,8 @@ class GemView extends Component {
                 <div className='gem-pic'>
                     <img src={imageURL} alt="The gem" />
                     <h3 className='bottom-left'>{title}</h3>
+                    <Link to='/' className='top-left white-text'>
+                        <i class="material-icons white-text">arrow_back</i></Link>
                 </div>
                 <div className="tabs-container">
                     <ul id="tabs-swipe-demo" className="tabs">
