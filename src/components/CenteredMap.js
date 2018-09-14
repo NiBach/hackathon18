@@ -8,6 +8,7 @@ import { markersCollection } from "../collections";
 import NavBar from "./NavBar";
 
 
+
 const defaultLocation = {
   lat: 0,
   lng: 0,

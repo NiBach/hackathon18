@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import InfoBox from 'react-google-maps/lib/components/addons/InfoBox';
 import { Marker} from "react-google-maps"
 import { withFirebase } from 'react-redux-firebase';
-
+import RadishIcon from '../assets/radish.png'
 
 class MarkerWithInfo extends Component {
   state = {
@@ -49,7 +49,7 @@ class MarkerWithInfo extends Component {
 
 
       return (
-          <Marker position={position} onClick={this.handleMarkerClick}>
+          <Marker position={position} icon={RadishIcon} onClick={this.handleMarkerClick}>
               {this.state.opened ? <InfoBox options={{
                   pixelOffset: new window.google.maps.Size(-(window.innerWidth * 0.3), 0),
                   boxStyle: {

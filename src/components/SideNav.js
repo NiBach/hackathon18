@@ -13,9 +13,9 @@ function sidenav ({imageURL, name}) {
                     
                 </div>
                 
-                <a href="#user"><img class="circle" src={imageURL}/></a>
-                <a href="#name"><span class="white-text name">{name}</span></a>
-                <a href="#level"><span class="white-text name">Level: Sprout</span></a>                
+                <a href="#user"><img className="circle" src={imageURL}/></a>
+                <a href="#name"><span className="white-text name">{name}</span></a>
+                <a href="#level"><span className="white-text name">Level: Sprout</span></a>                
                 </div></li>
             <li><Link className='sidenav-close' to="/">geolocation</Link></li>
             <li><Link className='sidenav-close' to="/sharedlist">list</Link></li>
