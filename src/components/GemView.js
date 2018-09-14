@@ -3,9 +3,7 @@ import { connect } from "react-redux";
 import M from 'materialize-css/dist/js/materialize.min.js'
 import { Link } from "react-router-dom";
 import axios from 'axios';
-
-
-import FacebookProvider, { Comments } from 'react-facebook';
+import { Comments } from 'react-facebook';
 
 class GemView extends Component {
 
@@ -16,8 +14,6 @@ class GemView extends Component {
   };
   sendRecipeGet()
   {
-    const app_key = "f2661170";
-    const app_id = "405d3fd787ec4090ef19cc9ae276bed3";
 
         axios.get("https://api.edamam.com/search?q=" + this.props.title + "&app_id=f2661170&app_key=405d3fd787ec4090ef19cc9ae276bed3")
     .then(response => {
