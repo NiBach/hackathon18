@@ -38,7 +38,7 @@ class GemView extends Component {
         let car = document.getElementsByClassName('carousel-slider')[0];
         car.style.height = 'auto';
         car.style['min-height'] = (window.innerHeight*0.6 - 56)+'px';
-
+        M.Tabs.getInstance(document.getElementById("tabs-swipe-demo")).select('description-tab');
         this.sendRecipeGet();
     }
 
