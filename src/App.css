@@ -19,3 +19,36 @@
     }
 }
 
+.gem-pic {
+    height: calc(var(--vh, 1vh)*40);
+    width: 100vw;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+.bottom-left {
+    position: absolute;
+    bottom: 8px;
+    left: 16px;
+}
+
+.top-left {
+    position: absolute;
+    top: 8px;
+    left: 16px;
+}
+
+img {
+    object-fit: cover;
+}
+
+.tabs-content.carousel.carousel-slider .carousel-item.active {
+    position: relative;
+}
+
+.tab-container {
+    padding-left: 5%;
+    padding-right: 5%;
+}

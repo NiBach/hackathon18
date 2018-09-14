@@ -3,6 +3,11 @@ import InfoBox from 'react-google-maps/lib/components/addons/InfoBox';
 import { Marker} from "react-google-maps"
 import { withFirebase } from 'react-redux-firebase';
 import RadishIcon from '../assets/radish.png'
+import { connect } from "react-redux";
+import { compose } from "redux";
+import { push } from 'connected-react-router';
+import gemDataAction from "../actions/getDataAction";
+
 
 class MarkerWithInfo extends Component {
   state = {
@@ -20,8 +25,13 @@ class MarkerWithInfo extends Component {
       this.props.firebase.storage().ref().child(this.props.docId + '/pic.jpg').getDownloadURL().then(url => {this.setState({
           imageURL: url
       })
-      console.log(url);
     })
+  }
+  routeToGemView = () => {
+      const {imageURL} = this.state;
+      const {title, description, docId} = this.props;
+    this.props.dispatch(gemDataAction(imageURL,title,description));
+    this.props.dispatch(push('/gem/' + docId));
   }
 
   render() {
@@ -32,8 +42,6 @@ class MarkerWithInfo extends Component {
                       <div className="card-image">
                   <img 
                     src={this.state.imageURL}
-                    data-target='camera-modal'
-                    className='modal-trigger'
                     alt={description}/>
                               <span className="card-title">{title}</span>
                         </div>
@@ -41,7 +49,7 @@ class MarkerWithInfo extends Component {
                               <p>{description}</p>
                           </div>
                           <div className="card-action">
-                            <a data-target='camera-modal' className='modal-trigger'>More...</a>
+                            <a onClick={this.routeToGemView}>More...</a>
                             <a onClick={this.handleMarkerClick}>close</a>
                           </div>
                       </div>
@@ -67,4 +75,7 @@ class MarkerWithInfo extends Component {
   }
 }
 
-export default withFirebase(MarkerWithInfo);
+export default compose(
+    withFirebase,
+    connect(),
+)(MarkerWithInfo);

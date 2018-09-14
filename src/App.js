@@ -6,6 +6,8 @@ import SideNav from "./components/SideNav";
 import CenteredMap from "./components/CenteredMap";
 import CameraView from "./components/cameraView";
 import UploadDialog from "./components/UploadDialog";
+import GemView from './components/GemView';
+
 class App extends Component {
   render() {
     return (
@@ -15,6 +17,7 @@ class App extends Component {
           <Route exact path="/" component={CenteredMap} />
           <Route path="/cameraView" component={CameraView} />
           <Route path="/cameraDialog" component={UploadDialog}/>
+          <Route path="/gem/:gem_id" component={GemView}/>
         </Switch>
         <SideNav/>
         

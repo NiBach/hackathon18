@@ -13,12 +13,11 @@ function sidenav ({imageURL, name}) {
                     
                 </div>
                 
-                <a href="#user"><img className="circle" src={imageURL}/></a>
-                <a href="#name"><span className="white-text name">{name}</span></a>
-                <a href="#level"><span className="white-text name">Level: Sprout</span></a>                
+                <a><img className="circle" src={imageURL}/></a>
+                <a><span className="white-text name">{name}</span></a>
+                <a><span className="white-text name">Level: Sprout</span></a>                
                 </div></li>
             <li><Link className='sidenav-close' to="/">geolocation</Link></li>
-            <li><Link className='sidenav-close' to="/sharedlist">list</Link></li>
             <li><Link className='sidenav-close' to="/cameraView">Camera</Link></li>
             <li><Facebook /></li>
         </ul>
