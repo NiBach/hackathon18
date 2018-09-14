@@ -54,7 +54,7 @@ class UploadDialog extends Component {
                     </div>
                     <div className="input-field">
                         <textarea className='materialize-textarea' name="description" id="image-upload-description" onChange={this.handleChange} />
-                        <label htmlFor="image-upload-description">Forager's thoughtful comments</label>
+                        <label htmlFor="image-upload-description">Forager's thoughtful description</label>
                     </div>
                 </div>
                 <footer className='page-foote'>
