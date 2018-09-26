@@ -1,31 +1,44 @@
 import React, { Component } from 'react'
 import InfoBox from 'react-google-maps/lib/components/addons/InfoBox';
 import { Marker} from "react-google-maps"
-import { withFirebase } from 'react-redux-firebase';
+import { withFirebase, withFirestore } from 'react-redux-firebase';
 import RadishIcon from '../assets/radish.png'
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { push } from 'connected-react-router';
 import gemDataAction from "../actions/getDataAction";
+import { markersCollection } from "../collections";
+
 
 
 class MarkerWithInfo extends Component {
   state = {
       opened: false,
-      imageURL: ''
+      imageURL: this.props.imageURL ? this.props.imageURL : '',
   }
 
   handleMarkerClick = () =>{
+      if(this.state.opened){
+          this.props.onClose()
+      } else {
+          this.props.onOpen()
+      }
       this.setState({
           opened: !this.state.opened,
       })
   }
 
   componentDidMount() {
-      this.props.firebase.storage().ref().child(this.props.docId + '/pic.jpg').getDownloadURL().then(url => {this.setState({
-          imageURL: url
-      })
-    })
+    if(this.state.imageURL === ''){
+      this.props.firebase.storage().ref().child(this.props.docId + '/pic.jpg').getDownloadURL().then(url =>               {
+          this.setState({
+            imageURL: url
+          })
+          this.props.firestore.collection(markersCollection).doc(this.props.docId).update({
+              imageURL: url
+          })
+        })
+    }
   }
   routeToGemView = () => {
       const {imageURL} = this.state;
@@ -77,5 +90,6 @@ class MarkerWithInfo extends Component {
 
 export default compose(
     withFirebase,
+    withFirestore,
     connect(),
 )(MarkerWithInfo);

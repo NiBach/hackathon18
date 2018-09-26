@@ -6,7 +6,7 @@ import MarkerWithInfo from './MarkerWithInfo';
 import { geo } from "../storeCreator";
 import { markersCollection } from "../collections";
 import NavBar from "./NavBar";
-
+import M from 'materialize-css/dist/js/materialize'
 
 
 const defaultLocation = {
@@ -31,7 +31,9 @@ class CenteredMap extends Component {
   state = {
     loaded: false,
     panned: false,
-    places: []
+    places: [],
+    numOfOpened: 0,
+    carouselInit: false
   }
   ref = {}
 
@@ -44,6 +46,23 @@ class CenteredMap extends Component {
   componentWillReceiveProps({ center, myLocation }) {
     if (!center && !this.state.panned) {
       this.ref.panTo(myLocation ? myLocation : defaultLocation);
+    }
+  }
+  componentDidUpdate(){
+    if(this.state.places.length > 0 && this.state.numOfOpened === 0 && !this.state.carouselInit){
+      let elem = document.getElementById('carousel-map');
+      M.Carousel.init(elem, {
+        onCycleTo: htmlElem => console.log(htmlElem),
+      })
+      this.setState({
+        carouselInit: true
+      })
+     // let c = M.Carousel.getInstance(elem);
+      //console.log(c);
+    } else if ((this.state.places.length === 0 || this.state.numOfOpened > 0) && this.state.carouselInit){
+      this.setState({
+        carouselInit: false
+      })
     }
   }
 
@@ -78,9 +97,19 @@ class CenteredMap extends Component {
           {this.state.places.map(place => <MarkerWithInfo position={{
             lat: place.position.geopoint.latitude,
             lng: place.position.geopoint.longitude
-          }} title={place.title} description={place.description} key={place.id} docId={place.id} />)}
+          }} title={place.title} description={place.description} key={place.id} docId={place.id} imgURL={place.imageURL} onOpen={() => this.setState({
+            numOfOpened: this.state.numOfOpened+1
+          })}
+          onClose={() => this.setState({
+            numOfOpened: this.state.numOfOpened-1
+          })} />)}
         </GoogleMap>
         <NavBar/>
+        {(this.state.places.length > 0 && this.state.numOfOpened === 0) ? <div className="carousel" id='carousel-map'>
+          {this.state.places.map((place,n) => {
+            return <a key={place.id} className="carousel-item carousel-img-container"><img className='car-img' src={place.imageURL} alt={place.title}/></a>
+          })}
+        </div> : null}
       </div>
     )
   }
@@ -95,6 +124,6 @@ export default compose(
       lng: state.geolocation.longitude
     },
   })),
-  withScriptjs,
+  //withScriptjs,
   withGoogleMap
 )(CenteredMap);

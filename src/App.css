@@ -63,3 +63,16 @@ img {
     padding-left: 5%;
     padding-right: 5%;
 }
+#carousel-map {
+    position: absolute;
+    bottom: 10%;
+    height: 20vh !important;
+}
+.carousel-img-container {
+    height: 20vh !important;
+    width: 33%;
+}
+
+.car-img{
+    height: 20vh;
+}

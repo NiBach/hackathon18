@@ -24,13 +24,20 @@ class UploadDialog extends Component {
         const {lat, lng} = this.props.myLocation
         const markers = geo.collection(markersCollection);
         const id = this.props.firestore.collection(markersCollection).doc().id;
-        markers.setDoc(id, {
-            title: this.state.title,
-            description: this.state.description,
-            position: geo.point(lat, lng).data,
-        });
+        
         let ref = this.props.firebase.storage().ref().child(id + '/pic.jpg'); // TODO - change the name, and upload location as well
-        ref.putString(this.props.dataUri, 'data_url').then(() => console.log('uploaded')).catch(() => console.log('error:('));
+        ref.putString(this.props.dataUri, 'data_url').then(() => {
+            console.log('uploaded');
+            ref.getDownloadURL().then(url => {
+                markers.setDoc(id, {
+                    title: this.state.title,
+                    description: this.state.description,
+                    position: geo.point(lat, lng).data,
+                    imageURL: url,
+                });
+            })
+    
+    }).catch(() => console.log('error:('));
         this.props.dispatch(push('/'));
     }
 
